@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+@import 'tailwindcss';
+
+:root {
+  --font-sans: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  background: #f0f2f5;
+  color: #0f172a;
+  -webkit-font-smoothing: antialiased;
+}
+
+* { box-sizing: border-box; }
+
+::-webkit-scrollbar { width: 3px; height: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 2px; }
+
+/* Camera feed grid lines */
+.cam-grid-bg {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Scan line animation */
+@keyframes scanline {
+  0%   { transform: translateY(-100%); opacity: 0.6; }
+  100% { transform: translateY(600%);  opacity: 0; }
+}
+
+@keyframes pulse-ring {
+  0%   { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+@keyframes slide-in {
+  from { opacity: 0; transform: translateX(12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes dot-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.25; }
+}
+
+.animate-slide-in  { animation: slide-in  0.25s ease-out both; }
+.animate-fade-up   { animation: fade-up   0.3s ease-out both; }
+.dot-pulse         { animation: dot-pulse 1.6s ease-in-out infinite; }
+
+.scanline {
+  position: absolute;
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(59,130,246,0.5) 50%, transparent);
+  animation: scanline 4s linear infinite;
+  pointer-events: none;
+}
+
+.night-scanline {
+  background: linear-gradient(90deg, transparent, rgba(34,197,94,0.4) 50%, transparent);
+}
+
+/* Detection box */
+.det-box {
+  position: absolute;
+  border: 1.5px solid #f59e0b;
+  border-radius: 2px;
+  pointer-events: none;
+}
+.det-box-person { border-color: #3b82f6; }
+.det-box-vehicle { border-color: #f59e0b; }
+.det-box-threat  { border-color: #ef4444; }
+
+.det-label {
+  position: absolute;
+  top: -20px; left: 0;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  padding: 1px 4px;
+  border-radius: 2px;
+  white-space: nowrap;
+  line-height: 1.6;
+}
+
+/* Corner crosshair */
+.crosshair::before, .crosshair::after,
+.crosshair > span::before, .crosshair > span::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-color: rgba(255,255,255,0.25);
+  border-style: solid;
+}

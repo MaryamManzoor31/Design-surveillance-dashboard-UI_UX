@@ -1,0 +1,10 @@
+{
+  "description": "Monitors live surveillance feeds with automatic number-plate and face recognition, alerting users to security events including night-time detection.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
